@@ -226,6 +226,50 @@ python -m pip install psutil
 
 
 
+\## 📊 Energy \& Carbon Metrics
+
+
+
+SGIN continuously logs inference decisions and estimates energy and carbon impact.
+
+The following plots are generated automatically from real execution data.
+
+
+
+\## 📊 Energy \& Carbon Metrics
+
+
+
+SGIN generates the following plots from real execution data.
+
+
+
+\### 🔋 Energy Usage Over Time
+
+!\[Energy Over Time](plots/energy\_over\_time.png)
+
+
+
+\### 🌍 Carbon Emissions Over Time
+
+!\[Carbon Over Time](plots/carbon\_over\_time.png)
+
+
+
+\### 🧠 Decision Distribution
+
+!\[Decision Distribution](plots/decision\_distribution.png)
+
+
+
+These plots demonstrate how SGIN:
+
+\- Skips inference during non-optimal windows
+
+\- Minimizes energy usage
+
+\- Reduces carbon footprint compared to always-on cloud inference
+
 
 
 (Additional runtimes like ONNX can be added later.)
@@ -307,6 +351,4 @@ GitHub: https://github.com/santhanuss
 
 
 Building sustainable, energy-aware AI systems.💤 Sleeping GPU Inference Network (SGIN)
-
-
 
