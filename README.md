@@ -1,340 +1,250 @@
-💤 Sleeping GPU Inference Network (SGIN)
+&nbsp;💤 Sleeping GPU Inference Network (SGIN)
 
 
 
-Wake sleeping GPUs. Not data centers.
+\*\*Energy-aware AI inference that knows when \*not\* to run.\*\*
 
 
 
-SGIN is an energy-aware, user-side AI inference framework that intelligently decides where inference should run — CPU, GPU, or not at all — based on real hardware conditions.
+SGIN is a local-first inference framework that decides \*\*CPU / GPU / SKIP\*\*
 
+based on time, hardware state, and energy impact — helping reduce unnecessary
 
+compute, cost, and carbon emissions.
 
-Instead of defaulting to cloud inference, SGIN reuses idle (“sleeping”) user compute to reduce energy waste, preserve privacy, and slow unnecessary data-center expansion.
 
 
+---
 
-🌍 Why SGIN?
 
 
+\## 🌍 Why SGIN?
 
-Modern AI systems rely heavily on cloud infrastructure:
 
 
+Most AI systems assume:
 
-Always-on GPUs
+> \*Inference must always run.\*
 
 
 
-High cooling and network energy
+SGIN asks a better question:
 
+> \*\*Should inference run right now?\*\*
 
 
-Rising costs and carbon footprint
 
+By respecting \*\*time windows\*\*, \*\*hardware conditions\*\*, and \*\*energy impact\*\*,
 
+SGIN avoids waste and promotes sustainable AI execution.
 
-Meanwhile, millions of user devices sit idle for most of the day.
 
 
+---
 
-SGIN flips the model:
 
 
+\## ✨ Key Capabilities
 
-Move inference to the user’s compute — only when it is safe and efficient.
 
 
+\- 🧠 \*\*Policy-driven decisions\*\*: CPU, GPU, or SKIP  
 
-🚀 Key Features
+\- 🌙 \*\*Time-aware scheduling\*\* (work-life \& power policies)
 
+\- 🔋 \*\*Energy estimation\*\* (mWh)
 
+\- 🌱 \*\*Carbon estimation\*\* (gCO₂)
 
-🔋 Energy-aware decision engine
+\- 📊 \*\*CSV telemetry \& daily summaries\*\*
 
-Chooses CPU, GPU, or SKIP based on:
+\- 📈 \*\*Auto-generated plots\*\*
 
+\- ☁️ \*\*Cloud vs local carbon comparison\*\*
 
 
-Power state (plugged in / battery)
 
+---
 
 
-CPU load
 
+\## 🧪 Quick Start
 
 
-GPU availability \& temperature
 
+Run inference with decision logic:
 
 
-😴 Sleeping GPU logic
 
-Uses GPU only if already awake — avoids unnecessary wake-ups.
-
-
-
-🧠 Policy-driven execution
-
-Decisions are rule-based, transparent, and configurable.
-
-
-
-🔐 Local-first \& privacy-preserving
-
-No data leaves the device by default.
-
-
-
-🧩 Extensible architecture
-
-Ready for logging, scheduling, ONNX models, GPU acceleration, and future hybrid compute.
-
-
-
-🧪 Quick Demo
-
-
-
-Run the demo from the repository root:
-
-
+```bash
 
 python -m sleeping\_gpu\_inference.demo.run\_inference
 
-
-
-Example output:
-
-🧠 SGIN Decision: CPU
-
-🖥️ Running inference on CPU
-
-✅ Inference Result:
-
-\[CPU RESULT] Hello from Sleeping GPUs Inference Network
+Run daily summary:
 
 
 
+bash
 
+Copy code
 
-Depending on system conditions, SGIN may choose:
+python -m sleeping\_gpu\_inference.demo.run\_daily\_summary
 
-
-
-GPU
-
-
-
-CPU
+Generate plots:
 
 
 
-SKIP (system busy or energy-unsafe)
+bash
 
+Copy code
 
-
-All outcomes are correct behavior.
-
-
+python -m sleeping\_gpu\_inference.demo.run\_plots
 
 📁 Project Structure
 
+bash
+
+Copy code
+
 sleeping\_gpu\_inference/
 
-├── demo/
+├── demo/          # Runnable entry points
 
-│   └── run\_inference.py      # Demo runner
+├── runtime/       # CPU / GPU execution engines
 
-├── profiler/
+├── profiler/      # Hardware state detection
 
-│   └── hardware\_state.py     # CPU/GPU state detection
+├── scheduler/     # Time-based policies
 
-├── runtime/
+├── energy/        # Energy \& carbon estimation
 
-│   ├── cpu\_engine.py         # CPU inference engine
+├── logging/       # CSV \& decision logs
 
-│   ├── gpu\_engine.py         # GPU inference engine
+├── reports/       # Summaries \& plots
 
-│   └── decision.py           # Execution decision logic
-
-├── .gitignore
-
-├── \_\_init\_\_.py
+├── plots/         # Generated PNG graphs
 
 └── README.md
 
+🧠 How Decisions Work
 
+SGIN evaluates, in order:
 
-🧠 How the Decision Works
 
 
+⏰ Time policy (allowed window?)
 
-SGIN evaluates system conditions before inference:
 
 
+🔌 Power state (plugged in?)
 
-Condition	Action
 
-GPU idle, cool, plugged in	Run on GPU
 
-On battery or GPU too warm	Run on CPU
+🎮 GPU state (idle \& cool?)
 
-High system load	Skip inference
 
 
+🖥️ CPU load
 
-This ensures responsible compute usage, not brute force execution.
 
 
+❌ Otherwise → SKIP
 
-🌱 Environmental Impact
 
 
+Skipping inference is treated as a valid, optimal decision.
 
-SGIN helps reduce:
 
 
+📊 Metrics \& Visuals
 
-Data-center GPU demand
+SGIN generates plots directly from real execution data.
 
 
 
-Network energy usage
+🔋 Energy Usage Over Time
 
 
 
-Idle hardware waste
+🌍 Carbon Emissions Over Time
 
 
 
-Always-on compute patterns
+🧠 Decision Distribution
 
 
 
-It promotes event-driven, energy-aware AI, aligned with Green IT and ESG goals.
+☁️ Cloud vs SGIN (Why Local Wins)
 
+For the same workload:
 
 
-🛠️ Installation
 
-git clone https://github.com/santhanuss/sleeping\_gpu\_inference.git
+Cloud inference uses always-on datacenter GPUs
 
-cd sleeping\_gpu\_inference
 
-python -m pip install psutil
 
+SGIN runs only when needed
 
 
-\## 📊 Energy \& Carbon Metrics
 
+SKIP = zero energy, zero carbon
 
 
-SGIN continuously logs inference decisions and estimates energy and carbon impact.
 
-The following plots are generated automatically from real execution data.
+Daily reports quantify carbon saved by avoiding cloud inference.
 
 
 
-\## 📊 Energy \& Carbon Metrics
+🌱 Design Philosophy
 
+Prefer not running over running inefficiently
 
 
-SGIN generates the following plots from real execution data.
 
+Use estimates, not fake precision
 
 
-\### 🔋 Energy Usage Over Time
 
-!\[Energy Over Time](plots/energy\_over\_time.png)
+Optimize for policy \& behavior, not benchmarks
 
 
 
-\### 🌍 Carbon Emissions Over Time
-
-!\[Carbon Over Time](plots/carbon\_over\_time.png)
-
-
-
-\### 🧠 Decision Distribution
-
-!\[Decision Distribution](plots/decision\_distribution.png)
-
-
-
-These plots demonstrate how SGIN:
-
-\- Skips inference during non-optimal windows
-
-\- Minimizes energy usage
-
-\- Reduces carbon footprint compared to always-on cloud inference
-
-
-
-(Additional runtimes like ONNX can be added later.)
+Make sustainability measurable
 
 
 
 🛣️ Roadmap
 
-
-
- Real ONNX model integration
-
-
-
- Decision \& energy logging
+YAML-based policy configuration
 
 
 
- Night-time / scheduled inference
+Weekly / monthly reports
 
 
 
- GPU acceleration support
+Cloud vs SGIN overlay graphs
 
 
 
- Cloud fallback comparison
+GPU acceleration path
 
 
 
- Research \& whitepaper version
+Blog / whitepaper version
 
 
 
 🤝 Contributing
 
+Ideas, issues, and discussions are welcome.
 
-
-Contributions are welcome — especially around:
-
-
-
-Green AI
-
-
-
-Edge inference
-
-
-
-Scheduling \& metrics
-
-
-
-Distributed / hybrid compute
-
-
-
-Open an issue or pull request to start.
+This project is about better decisions, not bigger models.
 
 
 
 📄 License
-
-
 
 MIT License
 
@@ -342,13 +252,11 @@ MIT License
 
 👤 Author
 
-
-
 Santhanu
 
 GitHub: https://github.com/santhanuss
 
 
 
-Building sustainable, energy-aware AI systems.💤 Sleeping GPU Inference Network (SGIN)
+Building thoughtful, energy-aware AI systems.
 
