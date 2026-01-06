@@ -1,0 +1,16 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual env
+.venv/
+
+# Logs & data
+*.log
+*.csv
+
+# Models (keep ONNX, ignore temp)
+*.onnx.tmp
+
+# OS
+desktop.ini
